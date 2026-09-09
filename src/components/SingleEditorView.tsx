@@ -37,6 +37,7 @@ import { insertImageBlockAfterCursor } from './editorImageInsertion'
 import { useBlockNoteSideMenuHoverGuard } from './blockNoteSideMenuHoverGuard'
 import { TolariaSlashMenu } from './TolariaSlashMenu'
 import { TolariaFormattingToolbar, TolariaFormattingToolbarController } from './tolariaEditorFormatting'
+import { useEditorContextMenu } from './EditorContextMenu'
 import { TolariaCollapsedHeadingsController, TolariaSideMenu } from './tolariaBlockNoteSideMenu'
 import { useEditorLinkActivation } from './useEditorLinkActivation'
 import { ImageLightbox } from './ImageLightbox'
@@ -815,6 +816,12 @@ export function SingleEditorView(options: {
     typeEntryMap,
     vaultPath,
   })
+  const contextMenu = useEditorContextMenu({
+    containerRef,
+    editable,
+    editor,
+    locale,
+  })
 
   return (
     <div
@@ -823,6 +830,7 @@ export function SingleEditorView(options: {
       aria-label="Rich text editor"
       className={`editor__blocknote-container${isDragOver ? ' editor__blocknote-container--drag-over' : ''}`}
       style={cssVars as React.CSSProperties}
+      onContextMenu={contextMenu.handleEditorContextMenu}
       onCopyCapture={handleCopyCapture}
       onFocusCapture={handleFocusCapture}
       onMouseLeave={clearCopyTarget}
@@ -835,6 +843,7 @@ export function SingleEditorView(options: {
           <div className="editor__drop-overlay-label">Drop image here</div>
         </div>
       )}
+      {contextMenu.menuNode}
       <BlockNoteRenderRecoveryBoundary onRecover={(_, reason) => repairEditorDocumentForRenderRecovery(editor, reason)}>
         {(recoveryKey) => (
           <VaultExpressionProvider
