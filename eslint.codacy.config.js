@@ -55,11 +55,9 @@ export default [
           'editor.blocksToHTMLLossy': { htmlOutput: true },
           'editor.pasteHTML': { htmlInput: true, safe: true },
           'fullNoteClipboardPayload': { htmlOutput: true, safe: true },
+          'hostHtml.appendChild': { htmlInput: true, safe: true },
           'writeFullNoteClipboard': { htmlInput: true, safe: true },
           'writeRichEditorClipboardPayload': { htmlInput: true, safe: true },
-          'document.createElement': { htmlOutput: true },
-          'hostHtml.appendChild': { htmlInput: true, safe: true },
-          'range.selectNodeContents': { htmlInput: true, safe: true },
           // Member calls whose receiver is not a plain identifier (e.g.
           // expect(x).toContain) resolve to these dotted candidate names.
           '.toContain': { htmlInput: true, safe: true },

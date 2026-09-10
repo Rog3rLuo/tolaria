@@ -21,7 +21,8 @@ function richClipboardWriter(): ClipboardRichWriter | null {
     | undefined
   if (!clipboard || typeof clipboard.write !== 'function') return null
   if (typeof ClipboardItem !== 'function') return null
-  return items => clipboard.write(items)
+  const write = clipboard.write
+  return items => write(items)
 }
 
 export function fullNoteClipboardPayload(editor: RichEditor): FullNoteClipboardPayload | null {

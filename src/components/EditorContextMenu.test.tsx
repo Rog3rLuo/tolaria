@@ -103,12 +103,12 @@ describe('useEditorContextMenu', () => {
   it('shows the copy item only when a selection is alive inside the editor', () => {
     const { container } = render(<MenuHtmlHarness />)
     const hostHtml = container.querySelector('[data-testid="editor-container"]') as HTMLElement
-    const paragraphHtml = document.createElement('p')
-    paragraphHtml.textContent = 'selected text'
-    hostHtml.appendChild(paragraphHtml)
+    const paragraph = document.createElement('p')
+    paragraph.textContent = 'selected text'
+    hostHtml.appendChild(paragraph)
 
     const range = document.createRange()
-    range.selectNodeContents(paragraphHtml)
+    range.selectNodeContents(paragraph)
     const selection = window.getSelection()
     selection?.removeAllRanges()
     selection?.addRange(range)

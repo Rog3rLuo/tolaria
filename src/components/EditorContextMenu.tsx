@@ -137,7 +137,7 @@ export function useEditorContextMenu({
       && !selection.isCollapsed
       && containerRef.current?.contains(selection.anchorNode),
     )
-    trackEvent('editor_context_menu_opened', { has_selection: hasSelection })
+    trackEvent('editor_context_menu_opened', { has_selection: hasSelection ? 1 : 0 })
     setCtxMenu({ hasSelection, x: event.clientX, y: event.clientY })
   }, [containerRef, editable])
 
